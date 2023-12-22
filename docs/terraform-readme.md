@@ -1,1 +1,0 @@
-https://medium.com/@ashrujitpal/create-eks-and-and-install-ebs-efs-add-ons-using-github-actions-terraform-and-helm-25e817c3c11a
