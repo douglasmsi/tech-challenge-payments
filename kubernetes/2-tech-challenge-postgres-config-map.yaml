@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-payment-config-map
+  namespace: tech-challenge-namespace
+data:
+  postgres-payment-server: "tech-challenge-payment.caxagz6v59r4.us-east-1.rds.amazonaws.com"
+  postgres-payment-database-name: "techchallengedbpayment"
+  postgres-payment-user-username: "techchallengeuser"
+  postgres-payment-user-password: "techchallengepassword"
+  postgres-payment-port: "5432"
