@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-challenge-payment-app
+  namespace: tech-challenge-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tech-challenge-payment-app
+  template:
+    metadata:
+      labels:
+        app: tech-challenge-payment-app
+    spec:
+      containers:
+        - name: app
+          image: 653185900972.dkr.ecr.us-east-1.amazonaws.com/tech-challenge:payment-latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          env:
+            - name: DB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-payment-config-map
+                  key: postgres-payment-server
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-payment-config-map
+                  key: postgres-payment-port
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-payment-config-map
+                  key: postgres-payment-database-name
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-payment-config-map
+                  key: postgres-payment-user-username
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-payment-config-map
+                  key: postgres-payment-user-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tech-challenge-payment
+  namespace: tech-challenge-namespace
+spec:
+  selector:
+    app: tech-challenge-payment-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+  allocateLoadBalancerNodePorts: true
+  loadBalancerSourceRanges:
+    - 0.0.0.0/0
