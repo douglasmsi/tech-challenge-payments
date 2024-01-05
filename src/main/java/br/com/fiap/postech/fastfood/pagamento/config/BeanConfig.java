@@ -1,5 +1,6 @@
 package br.com.fiap.postech.fastfood.pagamento.config;
 
+import br.com.fiap.postech.fastfood.pagamento.TechChallengePaymentsApplication;
 import br.com.fiap.postech.fastfood.pagamento.feign.PedidoClient;
 import br.com.fiap.postech.fastfood.pagamento.ports.MetodoPagamentoPersistencePort;
 import br.com.fiap.postech.fastfood.pagamento.ports.PagamentoPersistencePort;
@@ -19,10 +20,13 @@ import br.com.fiap.postech.fastfood.pagamento.usecases.impl.CriarPagamentoUseCas
 import br.com.fiap.postech.fastfood.pagamento.usecases.impl.DeletarMetodoPagamentoUseCaseImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ApplicationConfig {
+@ComponentScan(basePackageClasses = TechChallengePaymentsApplication.class)
+
+public class BeanConfig {
 
   @Bean
   public ModelMapper modelMapper() {
