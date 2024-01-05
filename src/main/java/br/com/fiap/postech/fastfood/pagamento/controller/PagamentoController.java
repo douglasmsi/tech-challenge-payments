@@ -124,4 +124,12 @@ public class PagamentoController implements PagamentoControllerSwagger {
     return pagamentos.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).build()
         : ResponseEntity.ok(pagamentos);
   }
+
+  @GetMapping("/status/{numeroPedido}")
+  public ResponseEntity<Object> getPagamentosByStatus(
+      @PathVariable(value = "numeroPedido") String numeroPedido) {
+    var pagamentos = buscarPagamentoUseCase.getStatusPagamento(numeroPedido);
+    return pagamentos.getValue().isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+        : ResponseEntity.ok(pagamentos);
+  }
 }
