@@ -27,3 +27,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
+
+  cloud:
+    compatibility-verifier:
+      enabled: false
