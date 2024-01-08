@@ -30,7 +30,23 @@ spring:
 
 
   cloud:
+    kubernetes:
+      client:
+        namespace: tech-challenge-namespace
+      reload:
+        enabled: true
+      discovery:
+        all-namespaces: false
+        enabled: true
+        namespaces:
+          - tech-challenge-namespace
     compatibility-verifier:
       enabled: false
-    config:
-      enabled: false
+    openfeign:
+      httpclient:
+        enabled: true
+
+logging:
+  level:
+    org.springframework: DEBUG  # Configurando nível de log DEBUG para Spring
+    org.hibernate: DEBUG  # Configurando nível de log DEBUG para Hibernate
