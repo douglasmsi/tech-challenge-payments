@@ -25,7 +25,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackageClasses = TechChallengePaymentsApplication.class)
-
 public class BeanConfig {
 
   @Bean
