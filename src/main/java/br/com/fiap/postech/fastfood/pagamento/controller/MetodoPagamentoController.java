@@ -37,6 +37,7 @@ public class MetodoPagamentoController implements MetodoPagamentoControllerSwagg
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
+
   public ResponseEntity<Object> createMetodoPagamento(@RequestBody MetodoPagamentoRequest request) {
     try {
       var createdMetodoPagamento = criarMetodoPagamentoUseCase.createMetodoPagamento(request);
